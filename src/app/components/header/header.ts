@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { NgStyle } from "@angular/common";
@@ -17,5 +17,13 @@ export class Header {
   }
   Search(){
     this.router.navigate(['/shop'], { queryParams: { search: this.search.value } });
+  }
+  mobileMenuBtn = signal<boolean>(true);
+  mobileMenu(){
+    this.mobileMenuBtn.set(!this.mobileMenuBtn())
+  }
+  routerLinkCategory(id:number){
+    this.router.navigate(['/shop'], { queryParams: { category: id } });
+    this.mobileMenu();
   }
 }

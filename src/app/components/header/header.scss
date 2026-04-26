@@ -110,7 +110,78 @@ header {
                         background-color: var(--primary-hover);
                     }
                 }
+                .mobile-menu-btn {
+                    @include flex(center);
+                    @include size(44px, 44px);
+                    display: none;
+                    border: none;
+                    background: none;
+                    color: var(--text-primary);
+                    cursor: pointer;
+                }
             }
         }
+    }
+    .mobile-menu {
+        position: fixed;
+        top: var(--navbar-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg-primary);
+        padding: var(--spacing-lg);
+        overflow-y: auto;
+        transform: translate(100%);
+        transition: transform var(--transition-base);
+        z-index: var(--z-fixed);
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            .mobile-nav-link {
+                padding: var(--spacing-md) var(--spacing-lg);
+                color: var(--text-primary);
+                font-size: var(--font-size-lg);
+                font-weight: var(--font-weight-medium);
+                text-decoration: none;
+                border-radius: var(--radius-md);
+                transition: all var(--transition-base);
+                cursor: pointer;
+                &:hover {
+                    color: var(--primary);
+                    background: var(--bg-secondary);
+                }
+            }
+            .mobile-categories {
+                display: flex;
+                flex-direction: column;
+                max-height: 250px;
+                overflow-y: auto;
+                span {
+                    @include text(var(--text-tertiary), var(--font-size-sm), var(--font-weight-semibold));
+                    padding: var(--spacing-md) var(--spacing-lg);
+                    text-transform: uppercase;
+                    letter-spacing: .5px;
+                }
+                .sub-link {
+                    font-size: var(--font-size-base);
+                    padding-left: var(--spacing-2xl);
+                    color: var(--text-secondary);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width:770px) and (max-width: 1024px) {
+    header .container .content {
+        nav {display: none}
+        .nav-actions .mobile-menu-btn {display: flex}
+    }
+}
+@media screen and (max-width:769px) {
+    header .container .content {
+        .logo span, nav, .search-bar, .nav-actions a {display: none}
+        .nav-actions .mobile-menu-btn {display: flex}
     }
 }

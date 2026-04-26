@@ -22,28 +22,34 @@
             </div>
             <div class="nav-actions">
                 <a routerLink="/auth">Sign In</a>
-                <button class="mobile-menu"></button>
+                <button class="mobile-menu-btn" (click)="mobileMenu()">
+                    @if (mobileMenuBtn()) {
+                        <svg _ngcontent-ng-c3188417508="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line _ngcontent-ng-c3188417508="" x1="3" y1="12" x2="21" y2="12"></line><line _ngcontent-ng-c3188417508="" x1="3" y1="6" x2="21" y2="6"></line><line _ngcontent-ng-c3188417508="" x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    } @else {
+                        <svg _ngcontent-ng-c3188417508="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line _ngcontent-ng-c3188417508="" x1="18" y1="6" x2="6" y2="18"></line><line _ngcontent-ng-c3188417508="" x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    }
+                </button>
             </div>
         </div>
     </div>
-    <!-- <div class="mobile-menu">
+    <div class="mobile-menu" [ngStyle]="{transform: !mobileMenuBtn() ? 'translate(0)' :''}">
         <nav class="mobile-nav">
-            <a routerLink="/" class="mobile-nav-link">Home</a>
-            <a routerLink="/shop">Shop</a>
+            <a routerLink="/" class="mobile-nav-link" (click)="mobileMenu()">Home</a>
+            <a routerLink="/shop" class="mobile-nav-link" (click)="mobileMenu()">Shop</a>
             <div _ngcontent-ng-c3188417508="" class="mobile-categories">
                 <span _ngcontent-ng-c3188417508="" class="mobile-nav-label">Categories</span>
-                <a class="mobile-nav-link sub-link" routerLink="/shop?category=1"> Laptops </a>
-                <a class="mobile-nav-link sub-link" routerLink="/shop?category=2"> Smartphones </a>
-                <a class="mobile-nav-link sub-link" routerLink="/shop?category=3"> Monitors </a>
-                <a class="mobile-nav-link sub-link" routerLink="/shop?category=4"> Keyboards &amp; Mice </a>
-                <a class="mobile-nav-link sub-link" routerLink="/shop?category=5"> Headphones &amp; Audio </a>
-                <a class="mobile-nav-link sub-link" routerLink="/shop?category=6"> Graphics Cards </a>
-                <a class="mobile-nav-link sub-link" routerLink="/shop?category=7"> Storage </a>
-                <a class="mobile-nav-link sub-link" routerLink="/shop?category=8"> Networking </a>
+                <a class="mobile-nav-link sub-link" (click)="routerLinkCategory(1)"> Laptops </a>
+                <a class="mobile-nav-link sub-link" (click)="routerLinkCategory(2)"> Smartphones </a>
+                <a class="mobile-nav-link sub-link" (click)="routerLinkCategory(3)"> Monitors </a>
+                <a class="mobile-nav-link sub-link" (click)="routerLinkCategory(4)"> Keyboards &amp; Mice </a>
+                <a class="mobile-nav-link sub-link" (click)="routerLinkCategory(5)"> Headphones &amp; Audio </a>
+                <a class="mobile-nav-link sub-link" (click)="routerLinkCategory(6)"> Graphics Cards </a>
+                <a class="mobile-nav-link sub-link" (click)="routerLinkCategory(7)"> Storage </a>
+                <a class="mobile-nav-link sub-link" (click)="routerLinkCategory(8)"> Networking </a>
             </div>
             <div class="mobile-divider"></div>
-            <a routerLink="/auth/login" class="mobile-nav-link">Sign In</a>
-            <a routerLink="/auth/register" class="mobile-nav-link">Register</a>
+            <a routerLink="/auth/login" class="mobile-nav-link" (click)="mobileMenu()">Sign In</a>
+            <a routerLink="/auth/register" class="mobile-nav-link" (click)="mobileMenu()">Register</a>
         </nav>
-    </div> -->
+    </div>
 </header>
