@@ -1,0 +1,13 @@
+@use 'mixins' as *;
+
+footer {
+    @include size(100%, 56px);
+    @include flex(center);
+    background-color: var(--bg-dark-section);
+    color: var(--text-muted);
+    a {
+        @include text(var(--primary), 14px, 400);
+        text-decoration: underline;
+        text-align: center;
+    }
+}
