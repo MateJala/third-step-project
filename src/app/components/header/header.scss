@@ -90,8 +90,24 @@ header {
                     padding: var(--spacing-xs);
                     cursor: pointer;
                     display: none;
-                    &:active {
-                        display: flex;
+                }
+            }
+            .nav-actions {
+                @include flex(center);
+                gap: var(--spacing-sm);
+                a {
+                    @include size(auto, 44px);
+                    @include text(var(--text-white), var(--font-size-sm), var(--font-weight-semibold));
+                    @include flex(center);
+                    height: 44px;
+                    padding: 0 var(--spacing-xl);
+                    background: var(--primary);
+                    border: none;
+                    border-radius: var(--radius-full);
+                    transition: all var(--transition-base);
+                    &:hover {
+                        transform: translateY(-1px);
+                        background-color: var(--primary-hover);
                     }
                 }
             }

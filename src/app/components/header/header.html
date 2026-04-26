@@ -17,8 +17,8 @@
                 </div>
             </nav>
             <div class="search-bar">
-                <input type="text" placeholder="Search Products...">
-                <button class="clear-search"><svg _ngcontent-ng-c3188417508="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line _ngcontent-ng-c3188417508="" x1="18" y1="6" x2="6" y2="18"></line><line _ngcontent-ng-c3188417508="" x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                <input (keyup.enter)="Search()" type="text" name="search-bar" placeholder="Search Products..." [formControl]="search">
+                <button (click)="clearSearch()" class="clear-search" [ngStyle]="{display: search.value?.length ? 'flex' : 'none'}"><svg _ngcontent-ng-c3188417508="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line _ngcontent-ng-c3188417508="" x1="18" y1="6" x2="6" y2="18"></line><line _ngcontent-ng-c3188417508="" x1="6" y1="6" x2="18" y2="18"></line></svg></button>
             </div>
             <div class="nav-actions">
                 <a routerLink="/auth">Sign In</a>
