@@ -11,19 +11,32 @@ import { NgStyle } from "@angular/common";
 })
 export class Header {
   constructor(private router: Router){}
-  search = new FormControl('');
+
+  public search = new FormControl('');
   clearSearch(){
     this.search.setValue('');
   }
   Search(){
     this.router.navigate(['/shop'], { queryParams: { search: this.search.value } });
   }
-  mobileMenuBtn = signal<boolean>(true);
+
+  public mobileMenuBtn = signal<boolean>(true);
   mobileMenu(){
     this.mobileMenuBtn.set(!this.mobileMenuBtn())
   }
   routerLinkCategory(id:number){
     this.router.navigate(['/shop'], { queryParams: { category: id } });
-    this.mobileMenu();
+    !this.mobileMenuBtn() ? this.mobileMenu() : null;
+    this.hoverOver() ? this.hoverOver.set(false) : null;
+  }
+
+  public IsHoverable = window.matchMedia('(hover : hover)').matches;
+  public hoverOver = signal<boolean>(false);
+  hoverOverCategory(){
+    if(this.IsHoverable){
+      this.hoverOver.set(true)
+    } else {
+      this.hoverOver.set(!this.hoverOver())
+    }
   }
 }

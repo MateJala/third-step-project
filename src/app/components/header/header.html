@@ -10,10 +10,22 @@
             <nav>
                 <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a>
                 <a routerLink="/shop" routerLinkActive="active" class="nav-link">Shop</a>
-                <div class="nav-dropdown">
-                    <span class="nav-link">
+                <div class="nav-dropdown" (mouseleave)="hoverOver.set(false)">
+                    <span class="nav-link" (mouseenter)="IsHoverable ? hoverOverCategory() : null" (click)="!IsHoverable ? hoverOverCategory() : null" >
                         Categories <svg _ngcontent-ng-c3188417508="" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline _ngcontent-ng-c3188417508="" points="6 9 12 15 18 9"></polyline></svg>
                     </span>
+                    @if (hoverOver()) {
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" (click)="routerLinkCategory(1)"> Laptops <span class="item-count">6</span></a>
+                            <a class="dropdown-item" (click)="routerLinkCategory(2)"> Smartphones <span class="item-count">7</span></a>
+                            <a class="dropdown-item" (click)="routerLinkCategory(3)"> Monitors <span class="item-count">4</span></a>
+                            <a class="dropdown-item" (click)="routerLinkCategory(4)"> Keyboards &amp; Mice <span class="item-count">5</span></a>
+                            <a class="dropdown-item" (click)="routerLinkCategory(5)"> Headphones &amp; Audio <span class="item-count">5</span></a>
+                            <a class="dropdown-item" (click)="routerLinkCategory(6)"> Graphics Cards <span class="item-count">4</span></a>
+                            <a class="dropdown-item" (click)="routerLinkCategory(7)"> Storage <span class="item-count">5</span></a>
+                            <a class="dropdown-item" (click)="routerLinkCategory(8)"> Networking <span class="item-count">4</span></a>
+                        </div>
+                    }
                 </div>
             </nav>
             <div class="search-bar">

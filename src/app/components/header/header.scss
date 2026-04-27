@@ -59,6 +59,37 @@ header {
                         gap: var(--spacing-xs);
                         cursor: pointer;
                     }
+                    .dropdown-menu {
+                        position: absolute;
+                        top: 90%;
+                        left: 0;
+                        min-width: 200px;
+                        background: var(--bg-card);
+                        border: 1px solid var(--border-primary);
+                        border-radius: var(--radius-lg);
+                        box-shadow: var(--shadow-lg);
+                        padding: var(--spacing-sm);
+                        margin-top: var(--spacing-xs);
+                        animation: dropdownFadeIn var(--transition-fast);
+                        .dropdown-item {
+                            @include flex(space-between);
+                            @include text(var(--text-secondary), var(--font-size-sm), 400);
+                            padding: var(--spacing-sm) var(--spacing-md);
+                            border-radius: var(--radius-md);
+                            transition: all var(--transition-base);
+                            cursor: pointer;
+                            &:hover {
+                                background: var(--bg-secondary);
+                                color: var(--primary);
+                            }
+                            span {
+                                @include text(var(--text-muted), var(--font-size-xs), 400);
+                                background: var(--bg-tertiary);
+                                padding: 2px 6px;
+                                border-radius: var(--radius-full);
+                            }
+                        }
+                    }
                 }
                 
             }
@@ -173,15 +204,28 @@ header {
     }
 }
 
-@media screen and (min-width:770px) and (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
     header .container .content {
         nav {display: none}
         .nav-actions .mobile-menu-btn {display: flex}
     }
 }
-@media screen and (max-width:769px) {
+@media screen and (max-width:768px) {
     header .container .content {
         .logo span, nav, .search-bar, .nav-actions a {display: none}
         .nav-actions .mobile-menu-btn {display: flex}
+    }
+}
+
+
+
+@keyframes dropdownFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
