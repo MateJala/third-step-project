@@ -27,8 +27,5 @@ export interface CategoryResponse {
 export class CategoryService {
   private http = inject(HttpClient);
   private url :string = 'https://shopapi.stepacademy.ge/api/categories';
-
-  GetCategories(){
-    return this.http.get<CategoryResponse>(this.url)
-  }
+  
 }

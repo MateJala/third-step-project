@@ -1,0 +1,52 @@
+@use 'mixins' as *;
+
+.featured-products {
+    background: var(--bg-secondary);
+    padding: var(--spacing-5xl) 0;
+    .container {
+        max-width: var(--container-xl);
+        margin: 0 auto;
+        padding: 0 var(--spacing-lg);
+        .section-header {
+            @include flex(space-between);
+            align-items: flex-end;
+            margin-bottom: var(--spacing-2xl);
+                @media (max-width: 768px) {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: var(--spacing-md);
+                }
+            .section-title {
+                h2 {
+                    @include text(var(--text-primary), var(--font-size-4xl), var(--font-weight-bold));
+                    margin-bottom: var(--spacing-xs);
+                }
+                p {
+                    @include text(var(--text-secondary), var(--font-size-md), 400);
+                    margin: 0;
+                }
+            }
+            .view-all-link {
+                @include flex(center);
+                @include text(var(--primary), var(--font-size-base), var(--font-weight-semibold));
+                gap: var(--spacing-xs);
+                transition: all var(--transition-base);
+                &:hover {
+                    gap: var(--spacing-sm);
+                    color: var(--primary-hover);
+                }
+            }
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-lg);
+                @media (max-width: 1200px){
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                @media (max-width: 576px) {
+                    grid-template-columns: 1fr;
+                }
+        }
+    }
+}
