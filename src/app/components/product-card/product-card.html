@@ -2,7 +2,9 @@
     <div class="card-image">
         <img loading="lazy" src="https://elements-resized.envatousercontent.com/envato-dam-assets-production/EVA/TRX/93/e1/a7/32/3e/v1_E10/E10HJFP4.jpg?w=1600&amp;cf_fit=scale-down&amp;q=85&amp;format=auto&amp;s=069172b9bfba8175d5b57463c0496e73c867cd44973c036d51fe51af61bbc9ed" alt="Netgear Nighthawk RS700S Wi-Fi 7">
         <div class="card-badges">
-
+            @if (IsNew()) {
+                <span class="badge badge-new">New</span>
+            }
         </div>
         <div class="quick-actions">
             <button class="action-btn">
@@ -13,7 +15,7 @@
             </button>
         </div>
     </div>
-    <div class="card-content">
+    <div class="card-content" [routerLink]="['/shop/product', 1]">
         <div class="card-meta">
             <span class="category">Networking</span>
             <span class="brand">Netgear</span>

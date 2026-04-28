@@ -1,0 +1,20 @@
+<section class="new-arrivals-products">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-title">
+                <span class="section-badge">
+                    Just In
+                </span>
+                <h2>New Arrivals</h2>
+                <p>The latest additions to our collection</p>
+            </div>
+            <a (click)="SortNewset()" class="view-all-link"> View All <svg _ngcontent-ng-c3873563376="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline _ngcontent-ng-c3873563376="" points="9 18 15 12 9 6"></polyline></svg></a>
+        </div>
+        <div class="products-grid">
+            <app-product-card [IsNew]="isNew()"></app-product-card>
+            <app-product-card [IsNew]="isNew()"></app-product-card>
+            <app-product-card [IsNew]="isNew()"></app-product-card>
+            <app-product-card [IsNew]="isNew()"></app-product-card>
+        </div>
+    </div>
+</section>

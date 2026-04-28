@@ -1,0 +1,57 @@
+@use 'mixins' as *;
+
+.features-section {
+    padding: var(--spacing-5xl) 0;
+    background: var(--bg-secondary);
+    .container {
+        max-width: var(--container-xl);
+        margin: 0 auto;
+        padding: 0 var(--spacing-lg);
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-lg);
+                @media (max-width: 1200px){
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                @media (max-width: 576px) {
+                    grid-template-columns: 1fr;
+                }
+            .feature-card {
+                background: var(--bg-card);
+                border: 1px solid var(--border-primary);
+                border-radius: var(--radius-xl);
+                padding: var(--spacing-2xl);
+                text-align: center;
+                transition: all var(--transition-base);
+                .feature-icon {
+                    @include size(64px, 64px);
+                    @include flex(center);
+                    margin: 0 auto var(--spacing-lg);
+                    background: var(--bg-secondary);
+                    border-radius: var(--radius-lg);
+                    color: var(--primary);
+                    transition: all var(--transition-base);
+                }
+                h3 {
+                    @include text(var(--text-primary), var(--font-size-lg), var(--font-weight-semibold));
+                    margin-bottom: var(--spacing-xs);
+                }
+                p {
+                    font-size: var(--font-size-sm);
+                    color: var(--text-tertiary);
+                    margin: 0;
+                }
+                &:hover {
+                    border-color: var(--primary);
+                    transform: translateY(-4px);
+                    box-shadow: var(--shadow-card-hover);
+                    .feature-icon {
+                        background: var(--primary);
+                        color: var(--text-white);
+                    }
+                }
+            }
+        }
+    }
+}
