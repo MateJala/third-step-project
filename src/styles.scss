@@ -5,6 +5,7 @@ $font-primary: 'Inter', 'Roboto', 'Noto Sans', -apple-system, BlinkMacSystemFont
     margin: 0;
     box-sizing: border-box;
     font-family: $font-primary;
+    line-height: 1.5715;
     ::selection{
         color: #fff;
         background: #1890ff;
