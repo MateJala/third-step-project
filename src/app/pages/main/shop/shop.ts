@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ProductCard } from "../../../components/product-card/product-card";
 
 @Component({
   selector: 'app-shop',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule, ProductCard],
   templateUrl: './shop.html',
   styleUrl: './shop.scss',
 })
@@ -29,6 +31,14 @@ export class Shop implements OnInit{
       this.inStockQueryParams = params['inStock'] ? params['inStock'] === 'true' : null
       this.minRatingQueryParams = params['minRating'] ? +params['minRating'] : null
       this.brandQueryParams = params['brand'] ?? null
+
+      if (params['sort']) {
+        const found = this.options.find(o => o.value === params['sort']);
+        if (found) {
+          this.selectedLabel = found.label;
+          this.selectedValue = found.value;
+        }
+      }
     });
   }
 
@@ -110,5 +120,101 @@ export class Shop implements OnInit{
       queryParams: {},
     });
   }
-  
+  private searchDebounce: any = null;
+  onSearchInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchQueryParams = value ? value : null;
+
+    clearTimeout(this.searchDebounce);
+    this.searchDebounce = setTimeout(() => {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { search: this.searchQueryParams ?? null },
+        queryParamsHandling: 'merge',
+      });
+    }, 500);
+  }
+  public isSelectOpen = false;
+  public selectedLabel = 'Sort by';
+  public selectedValue = ''
+  public options = [
+    { label: 'Price: Low to High', value: 'price-asc' },
+    { label: 'Price: High to Low', value: 'price-desc' },
+    { label: 'Name: A-Z', value: 'name' },
+    { label: 'Top Rated', value: 'rating' },
+    { label: 'Newest', value: 'newest' },
+  ];
+  selectOption(option: { label: string, value: string }) {
+    this.selectedLabel = option.label;
+    this.selectedValue = option.value;
+    this.isSelectOpen = false;
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { sort: option.value },
+      queryParamsHandling: 'merge',
+    });
+  }
+  removeFilter(filter: 'search' | 'category' | 'minPrice' | 'maxPrice' | 'inStock' | 'minRating' | 'brand'): void {
+    switch (filter) {
+      case 'search': this.searchQueryParams = null; break;
+      case 'category': this.categoryQueryParams = null; break;
+      case 'minPrice': this.minPriceQueryParams = null; break;
+      case 'maxPrice': this.maxPriceQueryParams = null; break;
+      case 'inStock': this.inStockQueryParams = null; break;
+      case 'minRating': this.minRatingQueryParams = null; break;
+      case 'brand': this.brandQueryParams = null; break;
+    }
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { [filter]: null },
+      queryParamsHandling: 'merge',
+    });
+  }
+  hasActiveFilters(): boolean {
+    return !!(
+      this.searchQueryParams ||
+      this.sortQueryParams ||
+      this.categoryQueryParams ||
+      this.minPriceQueryParams ||
+      this.maxPriceQueryParams ||
+      this.inStockQueryParams ||
+      this.minRatingQueryParams ||
+      this.brandQueryParams
+    );
+  }
+  public currentPage = 1;
+  public totalPages = 4;
+  public pageSize = 10;
+  public isPageSizeOpen = false;
+  public pageSizeOptions = [12, 24, 48, 10];
+  selectPageSize(size: number): void {
+    this.pageSize = size;
+    this.isPageSizeOpen = false;
+    this.currentPage = 1;
+  }
+  get totalPagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+  changePage(page: number): void {
+  if (page < 1 || page > this.totalPages) return;
+  this.currentPage = page;
+  }
+  activeFilterCount(): number {
+    let count = 0;
+    if (this.searchQueryParams) count++;
+    if (this.categoryQueryParams) count++;
+    if (this.minPriceQueryParams) count++;
+    if (this.maxPriceQueryParams) count++;
+    if (this.inStockQueryParams) count++;
+    if (this.minRatingQueryParams) count++;
+    if (this.brandQueryParams) count++;
+    return count;
+  }
+
+  public mobileFilterBtn = signal<boolean>(false)
+  mobileFitler(){
+    this.mobileFilterBtn.set(!this.mobileFilterBtn())
+  }
 }
